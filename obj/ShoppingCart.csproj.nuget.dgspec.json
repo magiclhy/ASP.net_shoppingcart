@@ -1,0 +1,94 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/lihongyi/NUS-sa 课件/SA402/ASP.NET/assignment/ShoppingCart1.0/ShoppingCart/ShoppingCart.csproj": {}
+  },
+  "projects": {
+    "/Users/lihongyi/NUS-sa 课件/SA402/ASP.NET/assignment/ShoppingCart1.0/ShoppingCart/ShoppingCart.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/lihongyi/NUS-sa 课件/SA402/ASP.NET/assignment/ShoppingCart1.0/ShoppingCart/ShoppingCart.csproj",
+        "projectName": "ShoppingCart",
+        "projectPath": "/Users/lihongyi/NUS-sa 课件/SA402/ASP.NET/assignment/ShoppingCart1.0/ShoppingCart/ShoppingCart.csproj",
+        "packagesPath": "/Users/lihongyi/.nuget/packages/",
+        "outputPath": "/Users/lihongyi/NUS-sa 课件/SA402/ASP.NET/assignment/ShoppingCart1.0/ShoppingCart/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/lihongyi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "/usr/local/share/dotnet/sdk/7.0.314/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.314/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

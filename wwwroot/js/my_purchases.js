@@ -10,7 +10,6 @@
 
 function updatePurchaseDate(event) {
     let selectedCode = event.currentTarget.value;
-    //alert("You have selected activation code: " + selectedCode);
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/Purchase/UpdatePurchaseDate");
     xhr.setRequestHeader("Content-Type", "application/json");

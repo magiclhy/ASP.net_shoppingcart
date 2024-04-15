@@ -20,7 +20,6 @@ function onclick(event) {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded", "charset=utf8");
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
-            // receives response from server
             if (this.status == 200) {
                 let data = JSON.parse(this.responseText);                
                 if (data.success === true) {
@@ -28,7 +27,6 @@ function onclick(event) {
                     let num = cartelem.innerHTML;
                     cartelem.innerHTML = parseInt(num) + 1;                   
                 } else {
-                    // Reloads to parse the alert during failure
                     window.location.reload();
                     return false;
                 }
@@ -36,6 +34,5 @@ function onclick(event) {
         }
     };
 
-    // send like/unlike choice to server
     xhr.send('productId=' + proId);
 }

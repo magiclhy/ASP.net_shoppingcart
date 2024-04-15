@@ -32,7 +32,7 @@
 {
     <div class="d-flex justify-content-center">
         <table>
-            @foreach (var group in Model) // Loop through each group
+            @foreach (var group in Model) 
             {
                 <tr>
                     <td class="border border-dark product-cell">
@@ -47,14 +47,14 @@
                         <table>
                             <tr><td class="p-1 font-weight-bold">Purchased On:</td><td class="p-1" id="product-@group.ProductId">@group.DateTime[0].ToString("d MMM yyyy")</td></tr>
                             <tr><td class="p-1 font-weight-bold">Quantity:</td><td class="p-1">@group.Quantity</td></tr>
-                            @if (group.Quantity == 1) // If quantity == 1, insert activation code as normal text
+                            @if (group.Quantity == 1) 
                             {
                                 @foreach (var item in group.ActivationCode)
                                 {
                                     <tr><td class="p-1 font-weight-bold">Activation Code:</td><td class="p-1">@item</td></tr>
                                 }
                             }
-                            else if (group.Quantity > 1) // If quantity > 1, insert activation codes in dropdown menu
+                            else if (group.Quantity > 1) 
                             {
                                 <tr>
                                     <td class="p-1 font-weight-bold">Activation Code:</td>

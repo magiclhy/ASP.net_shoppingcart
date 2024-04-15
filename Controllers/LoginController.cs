@@ -52,12 +52,11 @@ namespace ShoppingCart.Controllers
                 return Redirect("Index");                
             } else
             {
-                // Create and store session
+                // 创建session
                 string guid = null;
 
                 Session session = _db.Sessions.FirstOrDefault(session => session.UserId == user.Id);
 
-                // Gives user the same session back if a session is already detected but updates timestamp
                 if (session == null)
                 {
                     guid = Guid.NewGuid().ToString();
@@ -91,7 +90,7 @@ namespace ShoppingCart.Controllers
                 string cartCookie = HttpContext.Request.Cookies["guestCart"];                
                 if (cartCookie != null)
                 {
-                    // Overwrites current cart in account with guestCart if guestCart exists as per CW's specifications
+                    //覆盖账户购物车
                     GuestCart guestCart = JsonSerializer.Deserialize<GuestCart>(cartCookie);
                     foreach (var product in guestCart.Products)
                     {
@@ -108,7 +107,6 @@ namespace ShoppingCart.Controllers
                 _db.SaveChanges();
             }
 
-            // TempData was not expiring fast enough in some use cases, this ensures removal after single usage
             if (TempData["ReturnUrl"] != null)
             {
                 TempData.Remove("ReturnUrl");

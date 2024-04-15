@@ -1,4 +1,84 @@
-﻿using System;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using Microsoft.AspNetCore.Mvc;
+//using ShoppingCart.DBs;
+//using ShoppingCart.Models;
+
+//namespace ShoppingCart.Controllers
+//{
+//    public class PurchaseController : Controller
+//    {
+//        private readonly DbShoppingCart _db;
+
+//        public PurchaseController(DbShoppingCart db)
+//        {
+//            _db = db;
+//        }
+
+//        public IActionResult Index(Verify v)
+//        {
+//            var sessionId = Request.Cookies["sessionId"];
+//            if (!v.VerifySession(sessionId, _db))
+//            {
+//                TempData["Alert"] = "primary|Please log in to view your purchases.";
+//                TempData["ReturnUrl"] = "/Purchase/Index";
+//                return RedirectToAction("Index", "Login");
+//            }
+
+//            ViewData["Logged"] = true;
+//            var user = _db.Sessions.FirstOrDefault(x => x.Id == sessionId)?.User;
+//            ViewData["Username"] = user.Username;
+
+//            var purchases = _db.Orders
+//                .Where(o => o.UserId == user.Id)
+//                .SelectMany(o => o.OrderDetails)
+//                .Select(od => new
+//                {
+//                    od.Order.DateTime,
+//                    od.Id,
+//                    od.Product.ImageLink,
+//                    od.Product.Name,
+//                    od.Product.Description,
+//                    od.ProductId
+//                })
+//                .AsEnumerable()
+//                .GroupBy(x => new { x.ImageLink, x.Name, x.Description, x.ProductId })
+//                .Select(g => new PurchasesViewModel
+//                {
+//                    DateTime = g.Select(x => x.DateTime).ToList(),
+//                    ImageLink = g.Key.ImageLink,
+//                    Name = g.Key.Name,
+//                    Quantity = g.Count(),
+//                    Description = g.Key.Description,
+//                    ActivationCode = g.Select(x => x.Id).ToList(),
+//                    ProductId = g.Key.ProductId
+//                })
+//                .ToList();
+
+//            ViewData["HavePastOrders"] = purchases.Any();
+
+//            return View(purchases);
+//        }
+
+//        public IActionResult UpdatePurchaseDate([FromBody] string selectedCode)
+//        {
+//            var orderDetail = _db.OrderDetails.FirstOrDefault(x => x.Id == selectedCode);
+
+//            var purchaseDate = orderDetail?.Order.DateTime.ToString("d MMM yyyy");
+//            var productId = orderDetail?.ProductId ?? 0;
+
+//            return Json(new
+//            {
+//                PurchaseDate = purchaseDate,
+//                ProductId = productId
+//            });
+//        }
+//    }
+//}
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,25 +99,23 @@ namespace ShoppingCart.Controllers
 
         public IActionResult Index(Verify v)
         {
-            // Retrieve session
+            // session
             string sessionId = Request.Cookies["sessionId"];
 
-            if (v.VerifySession(sessionId, _db)) // If session exists, means user is logged in.
+            if (v.VerifySession(sessionId, _db)) 
             {
-                // Logout button
+                // Logout 按钮
                 ViewData["Logged"] = true;
 
                 User user = _db.Sessions.FirstOrDefault(x => x.Id == sessionId).User;
 
-                // Display username at top left
                 ViewData["Username"] = user.Username;
 
-                // Retrieve OrderDetails from DB
+                // 联合查询
                 List<OrderDetail> orderDetail = _db.OrderDetails.ToList();
                 List<Order> order = _db.Orders.ToList();
                 List<Product> product = _db.Products.ToList();
 
-                // Filter based on UserId. Order by date. Select and group by relevant columns.
                 IEnumerable<PurchasesViewModel> purchases =
                     from o in order
                     join od in orderDetail on o.Id equals od.OrderId
@@ -57,7 +135,7 @@ namespace ShoppingCart.Controllers
                         ProductId = grp.Key.ProductId
                     };
 
-                if (purchases.ToList().Count == 0) // If no purchases, send info to View to display "no past purchases"
+                if (purchases.ToList().Count == 0) 
                 {
                     ViewData["HavePastOrders"] = false;
 
@@ -68,7 +146,7 @@ namespace ShoppingCart.Controllers
 
                 return View(purchases.ToList());
             }
-            else // Else user is not logged in. Redirect to login page.
+            else 
             {
                 TempData["Alert"] = "primary|Please log in to view your purchases.";
                 TempData["ReturnUrl"] = "/Purchase/Index";
@@ -77,18 +155,18 @@ namespace ShoppingCart.Controllers
             }
         }
 
-        public IActionResult UpdatePurchaseDate([FromBody] string selectedCode)
-        {
-            OrderDetail orderDetail = _db.OrderDetails.FirstOrDefault(x => x.Id == selectedCode);
+        //public IActionResult UpdatePurchaseDate([FromBody] string selectedCode)
+        //{
+        //    OrderDetail orderDetail = _db.OrderDetails.FirstOrDefault(x => x.Id == selectedCode);
 
-            string purchaseDate = orderDetail.Order.DateTime.ToString("d MMM yyyy");
-            int productId = orderDetail.ProductId;
+        //    string purchaseDate = orderDetail.Order.DateTime.ToString("d MMM yyyy");
+        //    int productId = orderDetail.ProductId;
 
-            return Json(new
-            {
-                PurchaseDate = purchaseDate,
-                ProductId = productId
-            });
-        }
+        //    return Json(new
+        //    {
+        //        PurchaseDate = purchaseDate,
+        //        ProductId = productId
+        //    });
+        //}
     }
 }

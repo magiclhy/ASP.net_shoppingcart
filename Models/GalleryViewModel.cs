@@ -16,9 +16,7 @@ namespace ShoppingCart.Models
         public User User { get; set; }
         public List<Product> DisplayedProducts { get; set; }
 
-        // Row and column here refer to the number of products that should be visible in a row and column respectively
-        // Example: row = 3, column = 4 means that there should be 3 rows and 4 columns total in a page (12 products total)
-        public GalleryViewModel(int row, int column, User user, int page, List<Product> products)
+           public GalleryViewModel(int row, int column, User user, int page, List<Product> products)
         {
             Columns = column;
             Page = page;
